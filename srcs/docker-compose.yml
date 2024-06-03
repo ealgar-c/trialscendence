@@ -1,0 +1,67 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./requirements/backend/nginx
+    ports:
+      - 8080:8080
+    volumes:
+      - webcontent:/var/www/html
+    restart: always
+    env_file: .env
+    networks: 
+      - transcendence_net
+  html:
+    container_name: html
+    build:
+      context: ./requirements/frontend/html
+    volumes:
+      - webcontent:/content
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - transcendence_net
+  postgres:
+    container_name: postgres
+    build:
+      context: ./requirements/backend/postgres
+    restart: on-failure
+    env_file: .env
+    ports:
+      - 5432:5432
+    command: postgres -c config_file=/etc/postgresql.conf
+    networks:
+      - transcendence_net
+  django:
+    container_name: django
+    build:
+      context: ./requirements/backend/django
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: transcendence_db
+      DB_USER: ealgar-c
+      DB_PASSWORD: 42password
+    depends_on:
+      - postgres
+    volumes:
+      - ./backend/django:/app
+    ports:
+      - "8000:8000"
+    networks:
+      - transcendence_net
+volumes:
+  webcontent:
+    name: webcontent
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ealgar-c/data/webcontent
+      o: bind
+
+networks:
+  transcendence_net:
+    name: transcendence_net
+    driver: bridge
