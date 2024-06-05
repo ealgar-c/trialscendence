@@ -11,6 +11,8 @@ services:
       - webcontent:/var/www/html
     restart: always
     env_file: .env
+    depends_on:
+      - django
     networks: 
       - transcendence_net
   html:
@@ -41,7 +43,7 @@ services:
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - db_volume:/var/lib/postgresql/data
     expose:

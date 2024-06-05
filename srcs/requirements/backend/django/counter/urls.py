@@ -1,5 +1,6 @@
 from django.urls import path
+from .views import buttonCount
 
 urlpatterns = [
-    path('holamundo/', admin.site.urls),
+    path('click/', button_click, name='button_click'),
 ]
