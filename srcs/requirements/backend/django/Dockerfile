@@ -7,7 +7,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY manage.py .
 COPY ./backend/ /backend
+COPY ./counter/ /counter
 
-# CMD ["sh", "-c", "python3 manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+COPY init_django.sh .
 
-CMD ["sleep", "infinity"]
+RUN chmod +x init_django.sh
+
+CMD ["./init_django.sh"]
