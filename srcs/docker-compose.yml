@@ -15,31 +15,10 @@ services:
       - django
     networks: 
       - transcendence_net
-  html:
-    container_name: html
-    build:
-      context: ./requirements/frontend/html
-    volumes:
-      - webcontent:/content
-    restart: unless-stopped
-    env_file: .env
-    networks:
-      - transcendence_net
 
-  # postgres:
-  #   container_name: postgres
-  #   build:
-  #     context: ./requirements/backend/postgres
-  #   restart: on-failure
-  #   env_file: .env
-  #   ports:
-  #     - "5432:5432"
-  #   command: postgres -c config_file=/etc/postgresql.conf
-  #   networks:
-  #     - transcendence_net
   postgres:
     container_name: postgres
-    image: postgres:16.2-alpine3.19
+    image: bitnami/postgresql:16.2.0-debian-12-r8
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
@@ -70,6 +49,8 @@ services:
       - "8000:8000"
     networks:
       - transcendence_net
+
+
 volumes:
   webcontent:
     name: webcontent
@@ -78,6 +59,7 @@ volumes:
       type: none
       device: /home/ealgar-c/data/webcontent
       o: bind
+
   db_volume:
     name: db_volume
     driver: local
@@ -85,6 +67,7 @@ volumes:
       type: none
       device: /home/ealgar-c/data/db_volume
       o: bind
+
 
 networks:
   transcendence_net:

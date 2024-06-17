@@ -7,7 +7,7 @@ EXPOSE 8080
 
 COPY ./conf/nginx.conf etc/nginx/nginx.conf
 COPY ./tools/init_nginx.sh ./init_nginx.sh
-
+COPY html/content/* ./var/www/html/
 RUN chmod +x init_nginx.sh
 
 CMD ["./init_nginx.sh"]
