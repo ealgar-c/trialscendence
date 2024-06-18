@@ -35,12 +35,7 @@ services:
     container_name: django
     build:
       context: ./requirements/backend/django
-    environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_NAME: transcendence_db
-      DB_USER: ealgar-c
-      DB_PASSWORD: 42password
+    env_file: .env
     depends_on:
       - postgres
     volumes:
@@ -57,7 +52,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/ealgar-c/data/webcontent
+      device: /home/${USER}/data/webcontent
       o: bind
 
   db_volume:
@@ -65,7 +60,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/ealgar-c/data/db_volume
+      device: /home/${USER}/data/db_volume
       o: bind
 
 
