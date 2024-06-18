@@ -5,7 +5,7 @@ all:
 	-@ echo "CONTAINERS DIRECTORY: $(CONTAINERS_DIR)"
 	-@ sed 
 	-@ mkdir -p $(CONTAINERS_DIR) $(CONTAINERS_DIR)/webcontent $(CONTAINERS_DIR)/db_volume
-	-@ docker compose -f srcs/docker-compose.yml up --build
+	-@ docker-compose -f srcs/docker-compose.yml up --build
 
 clean:
 	-@ rm -rf $(CONTAINERS_DIR)/webcontent $(CONTAINERS_DIR)/db_volume

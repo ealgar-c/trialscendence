@@ -1,11 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('miBoton').addEventListener('click', function() {
-        fetch('/click/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({})
+        fetch('http://localhost:8000/', {
+            method: 'GET'
         })
         .then(response => {
 			console.log("Response received from backend");

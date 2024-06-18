@@ -2,11 +2,11 @@
 
 STATUS=1
 
-while [ $STATUS -ne 0]; do
+while [ $STATUS -ne 0 ]; do
 	pg_isready -h $DB_HOST -p $DB_PORT -U $DB_USER
 	STATUS=$?
 
-	if [ $STATUS -eq 0]; then
+	if [ $STATUS -eq 0 ]; then
 		echo "Database is ready"
 	else
 		sleep 1
