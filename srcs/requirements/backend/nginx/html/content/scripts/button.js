@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('miBoton').addEventListener('click', function() {
-        fetch('http://localhost:8000/', {
-            method: 'GET'
+        fetch('https://localhost:8080/api/click/', {
+            method: 'POST'
         })
         .then(response => {
 			console.log("Response received from backend");

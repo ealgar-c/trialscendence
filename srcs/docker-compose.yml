@@ -36,12 +36,10 @@ services:
     build:
       context: ./requirements/backend/django
     env_file: .env
-    environment:
-      DJANGO_SETTINGS_MODULE: "backend.settings"
     depends_on:
       - postgres
     volumes:
-      - ./backend/django:/app
+      - ./requirements/backend/django:/app
     ports:
       - "8000:8000"
     networks:
