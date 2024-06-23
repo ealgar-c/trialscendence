@@ -7,9 +7,6 @@ RUN apt-get -y install postgresql-client
 
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-COPY manage.py .
-COPY ./backend/ /backend
-COPY ./counter/ /counter
 
 COPY init_django.sh .
 

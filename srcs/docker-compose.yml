@@ -8,7 +8,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - webcontent:/var/www/html
+      - webcnt_volume:/var/www/html
     restart: always
     env_file: .env
     depends_on:
@@ -39,20 +39,21 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./requirements/backend/django:/app
+      - django_volume:/app
     ports:
       - "8000:8000"
     networks:
       - transcendence_net
+    restart: on-failure
 
 
 volumes:
-  webcontent:
-    name: webcontent
+  webcnt_volume:
+    name: webcnt_volume
     driver: local
     driver_opts:
       type: none
-      device: /home/${USER}/data/webcontent
+      device: ./srcs/requirements/frontend
       o: bind
 
   db_volume:
@@ -61,6 +62,14 @@ volumes:
     driver_opts:
       type: none
       device: /home/${USER}/data/db_volume
+      o: bind
+
+  django_volume:
+    name: django_volume
+    driver: local
+    driver_opts:
+      type: none
+      device: ./srcs/requirements/backend/django/apps
       o: bind
 
 

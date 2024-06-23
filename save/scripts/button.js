@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('miBoton').addEventListener('click', function() {
-        fetch('https://localhost:8080/api/click/', {
+        fetch('https://localhost:8080/click/', {
             method: 'POST'
         })
         .then(response => {
